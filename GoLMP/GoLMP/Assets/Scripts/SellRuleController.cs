@@ -17,7 +17,7 @@ public class SellRuleController : MonoBehaviour {
 
     private void Start()
     {
-        place = Mathf.RoundToInt(transform.position.x * 10.0f + -1 * transform.position.y * 100.0f);
+        place = Mathf.RoundToInt(transform.position.x * 10.0f + -1 * transform.position.y * 100.0f + transform.position.z * 1000.0f);
         GG = GameObject.Find("GlobalGod");
     }
 

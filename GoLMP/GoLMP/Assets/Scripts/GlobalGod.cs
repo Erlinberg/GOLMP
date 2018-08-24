@@ -13,29 +13,34 @@ public class GlobalGod : MonoBehaviour
 
     private int c = 0;
 
-    public int[] SellArray = new int[100];
+    public int[] SellArray = new int[1000];
 
-    public int[] SellArrayCopy = new int[100];
+    public int[] SellArrayCopy = new int[1000];
 
     private int sum = 0;
 
     private void CreateField()
     {
-        for (int i = 0; i < FieldSize; i++)
+        Debug.Log(SellArray.Length);
+        for (int f = 0; f < FieldSize; f++)
         {
-            for (int j = 0; j < FieldSize; j++)
+            for (int i = 0; i < FieldSize; i++)
             {
-                Instantiate(Resources.Load("Cube"), new Vector3(j / 10.0f, (i / 10.0f) * -1, 0), Quaternion.identity);
-                SellArray[c] = 0;
-                SellArrayCopy[c] = 0;
-                c++;
+                for (int j = 0; j < FieldSize; j++)
+                {
+                    Debug.Log(c);
+                    Instantiate(Resources.Load("Cube"), new Vector3(j / 10.0f, (i / 10.0f) * -1, f / 10.0f), Quaternion.identity);
+                    SellArray[c] = 0;
+                    SellArrayCopy[c] = 0;
+                    c++;
+                }
             }
         }
     }
 
     private void RuleCnt()
     {
-        for (int id = 0; id < FieldSize * FieldSize; id++)
+        for (int id = 0; id < Mathf.Pow(FieldSize,3); id++)
         {
             // Определение sum
             if (id - 1 > 0)
@@ -46,7 +51,7 @@ public class GlobalGod : MonoBehaviour
                 }
             }
             
-            if (id + 1 < FieldSize * FieldSize)
+            if (id + 1 < Mathf.Pow(FieldSize, 3))
             {
                 if (SellArray[id + 1] == 1)
                 {
@@ -62,9 +67,25 @@ public class GlobalGod : MonoBehaviour
                 }
             }
 
-            if (id + FieldSize < FieldSize * FieldSize)
+            if (id + FieldSize < Mathf.Pow(FieldSize, 3))
             {
                 if (SellArray[id + FieldSize] == 1)
+                {
+                    sum += 1;
+                }
+            }
+
+            if (id + Mathf.Pow(FieldSize, 2) < Mathf.Pow(FieldSize, 3))
+            {
+                if (SellArray[id + Mathf.RoundToInt(Mathf.Pow(FieldSize, 2))] == 1)
+                {
+                    sum += 1;
+                }
+            }
+
+            if (id - Mathf.Pow(FieldSize, 2) > 0)
+            {
+                if (SellArray[id - Mathf.RoundToInt(Mathf.Pow(FieldSize, 2))] == 1)
                 {
                     sum += 1;
                 }
@@ -72,17 +93,17 @@ public class GlobalGod : MonoBehaviour
             // Окончание определения sum
 
             // Начало условий
-            if (sum > 3)
+            if (sum > 4)
             {
                 SellArrayCopy[id] = 0;
             }
 
-            if (sum <= 1)
+            if (sum <= 2)
             {
                 SellArrayCopy[id] = 0;
             }
 
-            if (sum == 2)
+            if (sum == 3)
             {
                 SellArrayCopy[id] = 1;
             }
