@@ -11,28 +11,25 @@ public class GlobalGod : MonoBehaviour
 
     public bool begin = false;
 
-    private int c = 0;
-
     public int[] SellArray = new int[1000];
 
     public int[] SellArrayCopy = new int[1000];
+
+    public int LayersNum;
+
+    public int Layers;
 
     private int sum = 0;
 
     private void CreateField()
     {
-        Debug.Log(SellArray.Length);
         for (int f = 0; f < FieldSize; f++)
         {
             for (int i = 0; i < FieldSize; i++)
             {
                 for (int j = 0; j < FieldSize; j++)
                 {
-                    Debug.Log(c);
                     Instantiate(Resources.Load("Cube"), new Vector3(j / 10.0f, (i / 10.0f) * -1, f / 10.0f), Quaternion.identity);
-                    SellArray[c] = 0;
-                    SellArrayCopy[c] = 0;
-                    c++;
                 }
             }
         }
@@ -107,7 +104,6 @@ public class GlobalGod : MonoBehaviour
             {
                 SellArrayCopy[id] = 1;
             }
-            Debug.Log(sum);
             sum = 0;
         }
         SellArray = SellArrayCopy;
@@ -128,6 +124,22 @@ public class GlobalGod : MonoBehaviour
         if (Input.GetMouseButtonDown(1))
         {
             begin = true;
+        }
+
+        if (Input.GetKeyDown(KeyCode.Equals))
+        {
+            if (Layers < LayersNum)
+            {
+                Layers += 1;
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.Minus))
+        {
+            if (Layers > 1)
+            {
+                Layers -= 1;
+            }
         }
     }
 }
