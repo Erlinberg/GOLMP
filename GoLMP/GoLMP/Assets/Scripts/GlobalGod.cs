@@ -21,6 +21,8 @@ public class GlobalGod : MonoBehaviour
 
     private int sum = 0;
 
+    public string[] CharacterNameList;
+
     [SerializeField]
     private float time = 1;
 
@@ -34,7 +36,7 @@ public class GlobalGod : MonoBehaviour
             {
                 for (int j = 0; j < FieldSize; j++)
                 {
-                    Instantiate(Resources.Load("Куб"), new Vector3(j / 10.0f, (i / 10.0f) * -1, f / 10.0f), Quaternion.identity);
+                    Instantiate(Resources.Load(CharacterNameList[PlayerPrefs.GetInt("CharacterIndex")]), new Vector3(j / 10.0f, (i / 10.0f) * -1, f / 10.0f), Quaternion.identity);
                 }
             }
         }
