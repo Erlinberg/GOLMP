@@ -137,15 +137,33 @@ private void Minus()
     private void ChangeStatus(int Status)
     {
         GG.GetComponent<GlobalGod>().SellArray[place] = Status;
+        if (Status == 0)
+        {
+            transform.gameObject.tag = "NonAlive";
+        }
+        else
+        {
+            if (Status == 1)
+            {
+                transform.gameObject.tag = "Alive";
+            }
+        }
     }
 
     private void OnMouseOver()
     {
         if (active)
         {
-            if (Input.GetMouseButtonDown(0) & GG.GetComponent<GlobalGod>().begin != true)
+            if (Input.GetMouseButtonDown(0) & GG.GetComponent<GlobalGod>().begin != true & transform.gameObject.tag == "NonAlive")
             {
                 ChangeStatus(1);
+            }
+            else
+            {
+                if (Input.GetMouseButtonDown(0) & GG.GetComponent<GlobalGod>().begin != true & transform.gameObject.tag == "Alive")
+                {
+                    ChangeStatus(0);
+                }
             }
         }
     }

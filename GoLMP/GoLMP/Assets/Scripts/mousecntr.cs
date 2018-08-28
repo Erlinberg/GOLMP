@@ -16,7 +16,7 @@ public class mousecntr : MonoBehaviour {
 
     private void OnMouseExit()
     {
-        if (GetComponent<SellRuleController>()._tag == "NotAlive")
+        if (GetComponent<SellRuleController>()._tag == "NonAlive")
         {
             GetComponent<Renderer>().material = GetComponent<SellRuleController>().NotAlive;
         }

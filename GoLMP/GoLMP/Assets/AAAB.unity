@@ -262,8 +262,8 @@ MonoBehaviour:
   offset: {x: 0, y: 0, z: 0}
   sensitivity: 3
   limit: 80
-  zoom: 0.25
-  zoomMax: 10
+  zoom: 0.4
+  zoomMax: 6
   zoomMin: 3
 --- !u!1 &1488580875
 GameObject:
