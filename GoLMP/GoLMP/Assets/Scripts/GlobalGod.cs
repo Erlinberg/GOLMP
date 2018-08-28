@@ -21,6 +21,11 @@ public class GlobalGod : MonoBehaviour
 
     private int sum = 0;
 
+    [SerializeField]
+    private float time = 1;
+
+    private float timeLeft;
+
     private void CreateField()
     {
         for (int f = 0; f < FieldSize; f++)
@@ -29,7 +34,7 @@ public class GlobalGod : MonoBehaviour
             {
                 for (int j = 0; j < FieldSize; j++)
                 {
-                    Instantiate(Resources.Load("Cube"), new Vector3(j / 10.0f, (i / 10.0f) * -1, f / 10.0f), Quaternion.identity);
+                    Instantiate(Resources.Load("Куб"), new Vector3(j / 10.0f, (i / 10.0f) * -1, f / 10.0f), Quaternion.identity);
                 }
             }
         }
@@ -90,12 +95,12 @@ public class GlobalGod : MonoBehaviour
             // Окончание определения sum
 
             // Начало условий
-            if (sum > 4)
+            if (sum > 5)
             {
                 SellArrayCopy[id] = 0;
             }
 
-            if (sum <= 2)
+            if (sum <= 1)
             {
                 SellArrayCopy[id] = 0;
             }
@@ -112,13 +117,23 @@ public class GlobalGod : MonoBehaviour
     void Start()
     {
         CreateField();
+        timeLeft = time;
     }
 
     private void Update()
     {
-        if (begin == true & Input.GetKeyDown(KeyCode.RightArrow))
+        //if (begin == true & Input.GetKeyDown(KeyCode.RightArrow))
+        //{
+        //    RuleCnt();
+        //}
+        if (begin == true)
         {
-            RuleCnt();
+            timeLeft -= Time.deltaTime;
+            if (timeLeft < 0)
+            {
+                RuleCnt();
+                timeLeft = time;
+            }
         }
 
         if (Input.GetMouseButtonDown(1))

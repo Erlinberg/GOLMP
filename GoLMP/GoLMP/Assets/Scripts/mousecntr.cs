@@ -4,19 +4,26 @@ using UnityEngine;
 
 public class mousecntr : MonoBehaviour {
 
-    private Color M;
+    public Material Select;
+
+    public bool Selected = false;
 
     private void OnMouseEnter()
     {
-        M = GetComponent<Renderer>().material.color;
-        GetComponent<Renderer>().material.color = Color.cyan;
+        Selected = true;
+        GetComponent<Renderer>().material = Select;
     }
 
     private void OnMouseExit()
     {
-        if (GetComponent<Renderer>().material.color != Color.green)
+        if (GetComponent<SellRuleController>()._tag == "NotAlive")
         {
-            GetComponent<Renderer>().material.color = M;
+            GetComponent<Renderer>().material = GetComponent<SellRuleController>().NotAlive;
         }
+        else
+        {
+            GetComponent<Renderer>().material = GetComponent<SellRuleController>().Alive;
+        }
+        Selected = false;
     }
 }

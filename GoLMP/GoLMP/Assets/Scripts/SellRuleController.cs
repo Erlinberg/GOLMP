@@ -6,7 +6,7 @@ public class SellRuleController : MonoBehaviour {
 
     private GameObject GG;
 
-    private string _tag;
+    public string _tag;
 
     private int place;
 
@@ -14,11 +14,16 @@ public class SellRuleController : MonoBehaviour {
 
     private bool active = true;
 
+    public Material NotAlive;
+
+    public Material Alive;
+
     private void Start()
     {
         place = Mathf.RoundToInt(transform.position.x * 10.0f + -1 * transform.position.y * 100.0f + transform.position.z * 1000.0f);
         GG = GameObject.Find("GlobalGod");
         Layer = GG.GetComponent<GlobalGod>().Layers;
+        _tag = transform.gameObject.tag;
     }
 
     private void Disable()
@@ -147,13 +152,16 @@ private void Minus()
 
     public void DoMove()
     {
-        if (GG.GetComponent<GlobalGod>().SellArray[place] == 1)
+        if (!GetComponent<mousecntr>().Selected)
         {
-            GetComponent<Renderer>().material.color = Color.green;
-        }
-        else
-        {
-            GetComponent<Renderer>().material.color = Color.black;
+            if (GG.GetComponent<GlobalGod>().SellArray[place] == 1)
+            {
+                GetComponent<Renderer>().material = Alive;
+            }
+            else
+            {
+                GetComponent<Renderer>().material = NotAlive;
+            }
         }
     }
 
