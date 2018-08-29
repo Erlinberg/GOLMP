@@ -150,6 +150,7 @@ MonoBehaviour:
   CharacterNameList:
   - "\u041A\u0443\u0431"
   - Cube
+  - Cell
   time: 1
 --- !u!4 &179837215
 Transform:

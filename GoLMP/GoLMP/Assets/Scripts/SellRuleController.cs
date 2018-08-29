@@ -14,9 +14,9 @@ public class SellRuleController : MonoBehaviour {
 
     private bool active = true;
 
-    public Material NotAlive;
+    public Material[] NotAlive;
 
-    public Material Alive;
+    public Material[] Alive;
 
     private void Start()
     {
@@ -36,7 +36,6 @@ public class SellRuleController : MonoBehaviour {
     private void Enable()
     {
         gameObject.layer = 0;
-        GetComponent<MeshRenderer>().enabled = true;
         GetComponent<BoxCollider>().enabled = true;
         active = true;
     }
@@ -175,11 +174,13 @@ private void Minus()
         {
             if (GG.GetComponent<GlobalGod>().SellArray[place] == 1)
             {
-                GetComponent<Renderer>().material = Alive;
+                for (int i = 0;i < Alive.Length; i++)
+                    GetComponentsInChildren<Renderer>()[i].material = Alive[i];
             }
             else
             {
-                GetComponent<Renderer>().material = NotAlive;
+                for (int i = 0; i < NotAlive.Length; i++)
+                    GetComponentsInChildren<Renderer>()[i].material = NotAlive[i];
             }
         }
         if (GG.GetComponent<GlobalGod>().SellArray[place] == -1)
