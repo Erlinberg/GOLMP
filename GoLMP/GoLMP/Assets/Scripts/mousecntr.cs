@@ -17,13 +17,10 @@ public class mousecntr : MonoBehaviour {
     private void OnMouseExit()
     {
         if (GetComponent<SellRuleController>()._tag == "NonAlive")
-        {
             GetComponent<Renderer>().material = GetComponent<SellRuleController>().NotAlive;
-        }
         else
-        {
             GetComponent<Renderer>().material = GetComponent<SellRuleController>().Alive;
-        }
+        
         Selected = false;
     }
 }

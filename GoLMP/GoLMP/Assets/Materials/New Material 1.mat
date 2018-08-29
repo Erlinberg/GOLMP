@@ -74,5 +74,5 @@ Material:
     m_Colors:
     - Color_CB8932EE: {r: 0.2216793, g: 1, b: 0, a: 0}
     - Color_EF14AF86: {r: 0.8679245, g: 0.2906728, b: 0.2906728, a: 0}
-    - _Color: {r: 0, g: 0.83823526, b: 0.2485801, a: 0.691}
+    - _Color: {r: 0, g: 0, b: 0, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}

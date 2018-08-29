@@ -28,13 +28,14 @@ public class SellRuleController : MonoBehaviour {
 
     private void Disable()
     {
-        GetComponent<MeshRenderer>().enabled = false;
+        gameObject.layer = 8;
         GetComponent<BoxCollider>().enabled = false;
         active = false;
     }
 
     private void Enable()
     {
+        gameObject.layer = 0;
         GetComponent<MeshRenderer>().enabled = true;
         GetComponent<BoxCollider>().enabled = true;
         active = true;
@@ -180,6 +181,11 @@ private void Minus()
             {
                 GetComponent<Renderer>().material = NotAlive;
             }
+        }
+        if (GG.GetComponent<GlobalGod>().SellArray[place] == -1)
+        {
+            GetComponent<mousecntr>().enabled = false;
+            this.enabled = false;
         }
     }
 

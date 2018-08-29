@@ -13,19 +13,13 @@ public class CharacterListController : MonoBehaviour {
     {
         CharacterList = new GameObject[transform.childCount];
          for (int i = 0;i < transform.childCount;i++)
-        {
             CharacterList[i] = transform.GetChild(i).gameObject;
-        }
 
          foreach (GameObject go in CharacterList)
-        {
             go.SetActive(false);
-        }
 
         if (CharacterList[0])
-        {
             CharacterList[0].SetActive(true);
-        }
         
 	}
 
@@ -35,9 +29,7 @@ public class CharacterListController : MonoBehaviour {
 
         index--;
         if (index < 0)
-        {
             index = CharacterList.Length - 1;
-        }
 
         CharacterList[index].SetActive(true);
     }
@@ -48,9 +40,7 @@ public class CharacterListController : MonoBehaviour {
 
         index++;
         if (index == CharacterList.Length)
-        {
             index = 0;
-        }
 
         CharacterList[index].SetActive(true);
     }

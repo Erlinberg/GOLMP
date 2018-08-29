@@ -42,6 +42,14 @@ public class GlobalGod : MonoBehaviour
         }
     }
 
+    private void DeleteAllCubes()
+    {
+        for(int i = 0;i < 1000; i++)
+        {
+            SellArray[i] = -1;
+        }
+    }
+
     private void RuleCnt()
     {
         for (int id = 0; id < Mathf.Pow(FieldSize,3); id++)
@@ -113,9 +121,17 @@ public class GlobalGod : MonoBehaviour
             }
             sum = 0;
         }
-        SellArray = SellArrayCopy;
+        if (!(SellArrayCopy == SellArray))
+        {
+            SellArray = SellArrayCopy;
+        }
+        else
+        {
+            DeleteAllCubes();
+            GameObject View = GameObject.Find("MenuCanvas");
+            View.GetComponent<Canvas>().enabled = true;
+        }
     }
-    // Use this for initialization
     void Start()
     {
         CreateField();
@@ -124,12 +140,9 @@ public class GlobalGod : MonoBehaviour
 
     private void Update()
     {
-        //if (begin == true & Input.GetKeyDown(KeyCode.RightArrow))
-        //{
-        //    RuleCnt();
-        //}
         if (begin == true)
         {
+            Layers = LayersNum;
             timeLeft -= Time.deltaTime;
             if (timeLeft < 0)
             {
@@ -143,19 +156,19 @@ public class GlobalGod : MonoBehaviour
             begin = true;
         }
 
-        if (Input.GetKeyDown(KeyCode.Equals))
+        if (Input.GetKeyDown(KeyCode.Equals) & !begin)
         {
             if (Layers < LayersNum)
             {
-                Layers += 1;
+                Layers++;
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.Minus))
+        if (Input.GetKeyDown(KeyCode.Minus) & !begin)
         {
             if (Layers > 1)
             {
-                Layers -= 1;
+                Layers--;
             }
         }
     }
