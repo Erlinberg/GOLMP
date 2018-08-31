@@ -44,7 +44,7 @@ public class GlobalGod : MonoBehaviour
 
     private void DeleteAllCubes()
     {
-        for(int i = 0;i < 1000; i++)
+        for(int i = 0;i < FieldSize * FieldSize * FieldSize; i++)
         {
             SellArray[i] = -1;
         }

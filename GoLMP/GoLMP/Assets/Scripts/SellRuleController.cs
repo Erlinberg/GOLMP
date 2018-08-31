@@ -20,14 +20,6 @@ public class SellRuleController : MonoBehaviour {
 
     private bool changed = false;
 
-    private void Start()
-    {
-        place = Mathf.RoundToInt(transform.position.x * 10.0f + -1 * transform.position.y * 200.0f + transform.position.z * 4000.0f);
-        GG = GameObject.Find("GlobalGod");
-        Layer = GG.GetComponent<GlobalGod>().Layers;
-        _tag = transform.gameObject.tag;
-    }
-
     private void Disable()
     {
         gameObject.layer = 8;
@@ -50,7 +42,7 @@ public class SellRuleController : MonoBehaviour {
         active = true;
     }
 
-    private void Plus()
+    private void ChangeLayer()
     {
         float Sp = ((GG.GetComponent<GlobalGod>().LayersNum) + GG.GetComponent<GlobalGod>().Layers - 1) / 10.0f;
 
@@ -116,58 +108,23 @@ public class SellRuleController : MonoBehaviour {
             Disable();
             changed = false;
         }
+
+        if (!changed & transform.gameObject.tag == "Alive")
+        {
+            GetComponent<BoxCollider>().enabled = false;
+            changed = false;
+        }
+
         changed = false;
     }
 
-    private void Minus()
+    private void Start()
     {
-        float S = ((GG.GetComponent<GlobalGod>().LayersNum) + GG.GetComponent<GlobalGod>().Layers) / 10.0f;
-
-        float b = (GG.GetComponent<GlobalGod>().LayersNum - GG.GetComponent<GlobalGod>().Layers - 1) / 10.0f;
-
-        float SD = ((GG.GetComponent<GlobalGod>().LayersNum) + (GG.GetComponent<GlobalGod>().Layers - 1)) / 10.0f;
-
-        float bD = (GG.GetComponent<GlobalGod>().LayersNum - (GG.GetComponent<GlobalGod>().Layers - 1) - 1) / 10.0f;
-
-        if (transform.position.x == b)
-        {
-            Disable();
-        }
-
-        if (transform.position.y == -b)
-        {
-            Disable();
-        }
-
-        if (transform.position.z == b)
-        {
-            Disable();
-        }
-
-        if (transform.position.x == S)
-        {
-            Disable();
-        }
-
-        if (transform.position.y == -S)
-        {
-            Disable();
-        }
-
-        if (transform.position.z == S)
-        {
-            Disable();
-        }
-
-        if  (transform.position.z < SD & transform.position.y > SD & transform.position.x < SD || transform.position.z > bD & transform.position.y < bD & transform.position.x > bD)
-        {
-            Disable();
-        }
-
-        if ((transform.position.z == SD || transform.position.y == -SD || transform.position.x == SD) || (transform.position.z == bD || transform.position.y == -bD || transform.position.x == bD))
-        {
-            Enable();
-        }
+        place = Mathf.RoundToInt(transform.position.x * 10.0f + -1 * transform.position.y * 200.0f + transform.position.z * 4000.0f);
+        GG = GameObject.Find("GlobalGod");
+        Layer = GG.GetComponent<GlobalGod>().Layers;
+        _tag = transform.gameObject.tag;
+        ChangeLayer();
     }
 
     private void ChangeStatus(int Status)
@@ -228,22 +185,16 @@ public class SellRuleController : MonoBehaviour {
         if (GG.GetComponent<GlobalGod>().SellArray[place] == -1)
         {
             GetComponent<mousecntr>().enabled = false;
-            this.enabled = false;
+            GetComponent<SellRuleController>().enabled = false;
         }
     }
 
     void Update ()
     {
         DoMove();
-        if (Layer < GG.GetComponent<GlobalGod>().Layers)
+        if (Layer != GG.GetComponent<GlobalGod>().Layers)
         {
-            Plus();
-            Layer = GG.GetComponent<GlobalGod>().Layers;
-        }
-
-        if (Layer > GG.GetComponent<GlobalGod>().Layers)
-        {
-            Minus();
+            ChangeLayer();
             Layer = GG.GetComponent<GlobalGod>().Layers;
         }
     }
