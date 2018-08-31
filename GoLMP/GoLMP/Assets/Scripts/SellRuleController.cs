@@ -116,6 +116,7 @@ public class SellRuleController : MonoBehaviour {
             Disable();
             changed = false;
         }
+        changed = false;
     }
 
     private void Minus()
@@ -131,31 +132,26 @@ public class SellRuleController : MonoBehaviour {
         if (transform.position.x == b)
         {
             Disable();
-            changed = true;
         }
 
         if (transform.position.y == -b)
         {
             Disable();
-            changed = true;
         }
 
         if (transform.position.z == b)
         {
             Disable();
-            changed = true;
         }
 
         if (transform.position.x == S)
         {
             Disable();
-            changed = true;
         }
 
         if (transform.position.y == -S)
         {
             Disable();
-            changed = true;
         }
 
         if (transform.position.z == S)
@@ -163,14 +159,14 @@ public class SellRuleController : MonoBehaviour {
             Disable();
         }
 
-        if  (transform.position.z < SD & transform.position.y < SD & transform.position.x < SD)
+        if  (transform.position.z < SD & transform.position.y > SD & transform.position.x < SD || transform.position.z > bD & transform.position.y < bD & transform.position.x > bD)
         {
             Disable();
         }
 
-        if (transform.position.z > bD & transform.position.y > bD & transform.position.x > bD)
+        if ((transform.position.z == SD || transform.position.y == -SD || transform.position.x == SD) || (transform.position.z == bD || transform.position.y == -bD || transform.position.x == bD))
         {
-            Disable();
+            Enable();
         }
     }
 
