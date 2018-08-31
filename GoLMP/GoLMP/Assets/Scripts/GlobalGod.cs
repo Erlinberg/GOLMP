@@ -36,7 +36,7 @@ public class GlobalGod : MonoBehaviour
             {
                 for (int j = 0; j < FieldSize; j++)
                 {
-                    Instantiate(Resources.Load(CharacterNameList[PlayerPrefs.GetInt("CharacterIndex")]), new Vector3(j / 10.0f, (i / 10.0f) * -1, f / 10.0f), Quaternion.identity);
+                    Instantiate(Resources.Load("GameCells/" + CharacterNameList[PlayerPrefs.GetInt("CharacterIndex")]), new Vector3(j / 10.0f, (i / 10.0f) * -1, f / 10.0f), Quaternion.identity);
                 }
             }
         }
@@ -55,6 +55,8 @@ public class GlobalGod : MonoBehaviour
         for (int id = 0; id < Mathf.Pow(FieldSize,3); id++)
         {
             // Определение sum
+
+            // 12
             if (id - 1 > 0)
             {
                 if (SellArray[id - 1] == 1)
@@ -63,6 +65,7 @@ public class GlobalGod : MonoBehaviour
                 }
             }
             
+            // 14
             if (id + 1 < Mathf.Pow(FieldSize, 3))
             {
                 if (SellArray[id + 1] == 1)
@@ -71,6 +74,7 @@ public class GlobalGod : MonoBehaviour
                 }
             }
 
+            // 10
             if (id - FieldSize > 0)
             {
                 if (SellArray[id - FieldSize] == 1)
@@ -79,6 +83,7 @@ public class GlobalGod : MonoBehaviour
                 }
             }
 
+            // 16
             if (id + FieldSize < Mathf.Pow(FieldSize, 3))
             {
                 if (SellArray[id + FieldSize] == 1)
@@ -87,6 +92,7 @@ public class GlobalGod : MonoBehaviour
                 }
             }
 
+            // 22
             if (id + Mathf.Pow(FieldSize, 2) < Mathf.Pow(FieldSize, 3))
             {
                 if (SellArray[id + Mathf.RoundToInt(Mathf.Pow(FieldSize, 2))] == 1)
@@ -95,6 +101,7 @@ public class GlobalGod : MonoBehaviour
                 }
             }
 
+            // 4
             if (id - Mathf.Pow(FieldSize, 2) > 0)
             {
                 if (SellArray[id - Mathf.RoundToInt(Mathf.Pow(FieldSize, 2))] == 1)
@@ -102,6 +109,187 @@ public class GlobalGod : MonoBehaviour
                     sum += 1;
                 }
             }
+
+            // 8
+            if (id - Mathf.Pow(FieldSize, 2) + FieldSize + 1 > 0)
+            {
+                if (SellArray[id - Mathf.RoundToInt(Mathf.Pow(FieldSize, 2)) + FieldSize + 1] == 1)
+                {
+                    sum += 1;
+                }
+            }
+
+            // 6
+            if (id - Mathf.Pow(FieldSize, 2) + FieldSize - 1 > 0)
+            {
+                if (SellArray[id - Mathf.RoundToInt(Mathf.Pow(FieldSize, 2)) + FieldSize - 1] == 1)
+                {
+                    sum += 1;
+                }
+            }
+
+            // 7
+            if (id - Mathf.Pow(FieldSize, 2) + FieldSize > 0)
+            {
+                if (SellArray[id - Mathf.RoundToInt(Mathf.Pow(FieldSize, 2)) + FieldSize] == 1)
+                {
+                    sum += 1;
+                }
+            }
+
+            // 5
+            if (id - Mathf.Pow(FieldSize, 2) + 1 > 0)
+            {
+                if (SellArray[id - Mathf.RoundToInt(Mathf.Pow(FieldSize, 2)) + 1] == 1)
+                {
+                    sum += 1;
+                }
+            }
+
+            // 3 
+            if (id - Mathf.Pow(FieldSize, 2) - 1 > 0)
+            {
+                if (SellArray[id - Mathf.RoundToInt(Mathf.Pow(FieldSize, 2)) - 1] == 1)
+                {
+                    sum += 1;
+                }
+            }
+
+            // 2
+            if (id - Mathf.Pow(FieldSize, 2) - FieldSize + 1 > 0)
+            {
+                if (SellArray[id - Mathf.RoundToInt(Mathf.Pow(FieldSize, 2)) - FieldSize + 1] == 1)
+                {
+                    sum += 1;
+                }
+            }
+
+            // 0
+            if (id - Mathf.Pow(FieldSize, 2) - FieldSize - 1 > 0)
+            {
+                if (SellArray[id - Mathf.RoundToInt(Mathf.Pow(FieldSize, 2)) - FieldSize - 1] == 1)
+                {
+                    sum += 1;
+                }
+            }
+
+            // 1
+            if (id - Mathf.Pow(FieldSize, 2) - FieldSize > 0)
+            {
+                if (SellArray[id - Mathf.RoundToInt(Mathf.Pow(FieldSize, 2)) - FieldSize] == 1)
+                {
+                    sum += 1;
+                }
+            }
+
+            // 9
+            if (id - FieldSize - 1 > 0)
+            {
+                if (SellArray[id - FieldSize - 1] == 1)
+                {
+                    sum += 1;
+                }
+            }
+
+            // 11
+            if (id - FieldSize + 1 > 0)
+            {
+                if (SellArray[id - FieldSize + 1] == 1)
+                {
+                    sum += 1;
+                }
+            }
+
+            // 15
+            if (id + FieldSize - 1 < Mathf.Pow(FieldSize, 3))
+            {
+                if (SellArray[id + FieldSize - 1] == 1)
+                {
+                    sum += 1;
+                }
+            }
+
+            // 17
+            if (id + FieldSize + 1 < Mathf.Pow(FieldSize, 3))
+            {
+                if (SellArray[id + FieldSize + 1] == 1)
+                {
+                    sum += 1;
+                }
+            }
+
+            // 21
+            if (id + Mathf.Pow(FieldSize, 2) - 1 < Mathf.Pow(FieldSize, 3))
+            {
+                if (SellArray[id + Mathf.RoundToInt(Mathf.Pow(FieldSize, 2)) - 1] == 1)
+                {
+                    sum += 1;
+                }
+            }
+
+            // 23
+            if (id + Mathf.Pow(FieldSize, 2) + 1 < Mathf.Pow(FieldSize, 3))
+            {
+                if (SellArray[id + Mathf.RoundToInt(Mathf.Pow(FieldSize, 2)) + 1] == 1)
+                {
+                    sum += 1;
+                }
+            }
+
+            // 19
+            if (id + Mathf.Pow(FieldSize, 2) - FieldSize < Mathf.Pow(FieldSize, 3))
+            {
+                if (SellArray[id + Mathf.RoundToInt(Mathf.Pow(FieldSize, 2)) - FieldSize] == 1)
+                {
+                    sum += 1;
+                }
+            }
+
+            // 18
+            if (id + Mathf.Pow(FieldSize, 2) - FieldSize - 1 < Mathf.Pow(FieldSize, 3))
+            {
+                if (SellArray[id + Mathf.RoundToInt(Mathf.Pow(FieldSize, 2)) - FieldSize - 1] == 1)
+                {
+                    sum += 1;
+                }
+            }
+
+            // 20
+            if (id + Mathf.Pow(FieldSize, 2) - FieldSize < Mathf.Pow(FieldSize, 3))
+            {
+                if (SellArray[id + Mathf.RoundToInt(Mathf.Pow(FieldSize, 2)) - FieldSize] == 1)
+                {
+                    sum += 1;
+                }
+            }
+
+            // 24
+            if (id + Mathf.Pow(FieldSize, 2) + FieldSize - 1 < Mathf.Pow(FieldSize, 3))
+            {
+                if (SellArray[id + Mathf.RoundToInt(Mathf.Pow(FieldSize, 2)) + FieldSize - 1] == 1)
+                {
+                    sum += 1;
+                }
+            }
+
+            // 25
+            if (id + Mathf.Pow(FieldSize, 2) + FieldSize < Mathf.Pow(FieldSize, 3))
+            {
+                if (SellArray[id + Mathf.RoundToInt(Mathf.Pow(FieldSize, 2)) + FieldSize] == 1)
+                {
+                    sum += 1;
+                }
+            }
+
+            // 26
+            if (id + Mathf.Pow(FieldSize, 2) + FieldSize + 1 < Mathf.Pow(FieldSize, 3))
+            {
+                if (SellArray[id + Mathf.RoundToInt(Mathf.Pow(FieldSize, 2)) + FieldSize + 1] == 1)
+                {
+                    sum += 1;
+                }
+            }
+
             // Окончание определения sum
 
             // Начало условий

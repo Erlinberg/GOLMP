@@ -11,8 +11,20 @@ public class mousecntr : MonoBehaviour {
     private void OnMouseEnter()
     {
         Selected = true;
-        //if (GetComponent<SellRuleController>.)
-        //GetComponent<Renderer>().material = Select;
+        if (GetComponent<SellRuleController>().enabled)
+        {
+            if (GetComponent<SellRuleController>().NotAlive.Length > 1)
+            {
+                foreach (Transform child in transform)
+                {
+                    child.gameObject.GetComponent<Renderer>().material = Select;
+                }
+            }
+            else
+            {
+                transform.gameObject.GetComponent<Renderer>().material = Select;
+            }
+        }
     }
 
     private void OnMouseExit()

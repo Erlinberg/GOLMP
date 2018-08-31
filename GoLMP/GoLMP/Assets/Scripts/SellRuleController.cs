@@ -18,9 +18,11 @@ public class SellRuleController : MonoBehaviour {
 
     public Material[] Alive;
 
+    private bool changed = false;
+
     private void Start()
     {
-        place = Mathf.RoundToInt(transform.position.x * 10.0f + -1 * transform.position.y * 100.0f + transform.position.z * 1000.0f);
+        place = Mathf.RoundToInt(transform.position.x * 10.0f + -1 * transform.position.y * 200.0f + transform.position.z * 4000.0f);
         GG = GameObject.Find("GlobalGod");
         Layer = GG.GetComponent<GlobalGod>().Layers;
         _tag = transform.gameObject.tag;
@@ -29,6 +31,10 @@ public class SellRuleController : MonoBehaviour {
     private void Disable()
     {
         gameObject.layer = 8;
+        foreach (Transform child in transform)
+        {
+            child.gameObject.layer = 8;
+        }
         GetComponent<BoxCollider>().enabled = false;
         active = false;
     }
@@ -36,6 +42,10 @@ public class SellRuleController : MonoBehaviour {
     private void Enable()
     {
         gameObject.layer = 0;
+        foreach (Transform child in transform)
+        {
+            child.gameObject.layer = 0;
+        }
         GetComponent<BoxCollider>().enabled = true;
         active = true;
     }
@@ -51,6 +61,7 @@ public class SellRuleController : MonoBehaviour {
             if (transform.position.x <= Sp & transform.position.y >= -Sp)
             {
                 Enable();
+                changed = true;
             }
         }
 
@@ -59,6 +70,7 @@ public class SellRuleController : MonoBehaviour {
             if (transform.position.x <= Sp & transform.position.z <= Sp)
             {
                 Enable();
+                changed = true;
             }
         }
 
@@ -67,6 +79,7 @@ public class SellRuleController : MonoBehaviour {
             if (transform.position.z <= Sp & transform.position.y >= -Sp)
             {
                 Enable();
+                changed = true;
             }
         }
 
@@ -76,6 +89,7 @@ public class SellRuleController : MonoBehaviour {
             if (transform.position.x >= bp & transform.position.y <= -bp)
             {
                 Enable();
+                changed = true;
             }
         }
 
@@ -84,6 +98,7 @@ public class SellRuleController : MonoBehaviour {
             if (transform.position.x >= bp & transform.position.z >= bp)
             {
                 Enable();
+                changed = true;
             }
         }
 
@@ -92,43 +107,68 @@ public class SellRuleController : MonoBehaviour {
             if (transform.position.z >= bp & transform.position.y <= -bp)
             {
                 Enable();
+                changed = true;
             }
+        }
+
+        if (!changed & transform.gameObject.tag == "NonAlive")
+        {
+            Disable();
+            changed = false;
         }
     }
 
-
-private void Minus()
+    private void Minus()
     {
         float S = ((GG.GetComponent<GlobalGod>().LayersNum) + GG.GetComponent<GlobalGod>().Layers) / 10.0f;
 
         float b = (GG.GetComponent<GlobalGod>().LayersNum - GG.GetComponent<GlobalGod>().Layers - 1) / 10.0f;
 
+        float SD = ((GG.GetComponent<GlobalGod>().LayersNum) + (GG.GetComponent<GlobalGod>().Layers - 1)) / 10.0f;
+
+        float bD = (GG.GetComponent<GlobalGod>().LayersNum - (GG.GetComponent<GlobalGod>().Layers - 1) - 1) / 10.0f;
+
         if (transform.position.x == b)
         {
             Disable();
+            changed = true;
         }
 
         if (transform.position.y == -b)
         {
             Disable();
+            changed = true;
         }
 
         if (transform.position.z == b)
         {
             Disable();
+            changed = true;
         }
 
         if (transform.position.x == S)
         {
             Disable();
+            changed = true;
         }
 
         if (transform.position.y == -S)
         {
             Disable();
+            changed = true;
         }
 
         if (transform.position.z == S)
+        {
+            Disable();
+        }
+
+        if  (transform.position.z < SD & transform.position.y < SD & transform.position.x < SD)
+        {
+            Disable();
+        }
+
+        if (transform.position.z > bD & transform.position.y > bD & transform.position.x > bD)
         {
             Disable();
         }
@@ -176,6 +216,12 @@ private void Minus()
             {
                 for (int i = 0;i < Alive.Length; i++)
                     GetComponentsInChildren<Renderer>()[i].material = Alive[i];
+                if (active)
+                {
+                    transform.gameObject.layer = 9;
+                    foreach (Transform child in transform)
+                        child.gameObject.layer = 9;
+                }
             }
             else
             {
