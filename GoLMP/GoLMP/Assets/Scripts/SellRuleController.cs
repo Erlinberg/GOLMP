@@ -120,7 +120,7 @@ public class SellRuleController : MonoBehaviour {
 
     private void Start()
     {
-        place = Mathf.RoundToInt(transform.position.x * 10.0f + -1 * transform.position.y * 200.0f + transform.position.z * 4000.0f);
+        place = Mathf.RoundToInt(transform.position.x * 10.0f + -1 * transform.position.y * 100.0f + transform.position.z * 1000.0f);
         GG = GameObject.Find("GlobalGod");
         Layer = GG.GetComponent<GlobalGod>().Layers;
         _tag = transform.gameObject.tag;
@@ -169,7 +169,7 @@ public class SellRuleController : MonoBehaviour {
             {
                 for (int i = 0;i < Alive.Length; i++)
                     GetComponentsInChildren<Renderer>()[i].material = Alive[i];
-                if (active)
+                if (transform.gameObject.tag == "Alive")
                 {
                     transform.gameObject.layer = 9;
                     foreach (Transform child in transform)

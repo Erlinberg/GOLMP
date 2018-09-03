@@ -11,9 +11,9 @@ public class GlobalGod : MonoBehaviour
 
     public bool begin = false;
 
-    public int[] SellArray = new int[1000];
+    public int[] SellArray;
 
-    public int[] SellArrayCopy = new int[1000];
+    public int[] SellArrayCopy;
 
     public int LayersNum;
 
@@ -255,9 +255,9 @@ public class GlobalGod : MonoBehaviour
             }
 
             // 20
-            if (id + Mathf.Pow(FieldSize, 2) - FieldSize < Mathf.Pow(FieldSize, 3))
+            if (id + Mathf.Pow(FieldSize, 2) - FieldSize + 1 < Mathf.Pow(FieldSize, 3))
             {
-                if (SellArray[id + Mathf.RoundToInt(Mathf.Pow(FieldSize, 2)) - FieldSize] == 1)
+                if (SellArray[id + Mathf.RoundToInt(Mathf.Pow(FieldSize, 2)) - FieldSize + 1] == 1)
                 {
                     sum += 1;
                 }
@@ -320,8 +320,11 @@ public class GlobalGod : MonoBehaviour
             View.GetComponent<Canvas>().enabled = true;
         }
     }
+
     void Start()
     {
+        SellArray = new int[FieldSize * FieldSize * FieldSize];
+        SellArrayCopy = new int[FieldSize * FieldSize * FieldSize];
         CreateField();
         timeLeft = time;
     }
