@@ -12,11 +12,19 @@ public class SellRuleController : MonoBehaviour {
 
     public int Layer;
 
+    public Mesh[] activemeshes;
+
+    public Mesh[] nonactivemeshes;
+
     private bool active = true;
 
     public Material[] NotAlive;
 
     public Material[] Alive;
+
+    public int now = 0;
+
+    public Material mtr;
 
     private bool changed = false;
 
@@ -158,6 +166,19 @@ public class SellRuleController : MonoBehaviour {
                     ChangeStatus(0);
                 }
             }
+
+            if (transform.gameObject.tag == "Alive")
+            {
+                if (Input.GetKeyDown(KeyCode.Alpha1))
+                {
+                    now = 1;
+                }
+
+                if (Input.GetKeyDown(KeyCode.Alpha2))
+                {
+                    now = 2;
+                }
+            }
         }
     }
 
@@ -168,18 +189,31 @@ public class SellRuleController : MonoBehaviour {
             if (GG.GetComponent<GlobalGod>().SellArray[place] == 1)
             {
                 for (int i = 0;i < Alive.Length; i++)
-                    GetComponentsInChildren<Renderer>()[i].material = Alive[i];
-                if (transform.gameObject.tag == "Alive")
                 {
-                    transform.gameObject.layer = 9;
-                    foreach (Transform child in transform)
-                        child.gameObject.layer = 9;
+                    GetComponentsInChildren<Renderer>()[i].material = Alive[i];
+                    GetComponentsInChildren<MeshFilter>()[i].mesh = activemeshes[i];
+                }
+                transform.gameObject.layer = 9;
+                foreach (Transform child in transform)
+                    child.gameObject.layer = 9;
+
+                if (now == 1)
+                {
+                    GetComponent<Renderer>().material = Alive[0];
+                }
+
+                if (now == 2)
+                {
+                    GetComponent<Renderer>().material = mtr;
                 }
             }
             else
             {
                 for (int i = 0; i < NotAlive.Length; i++)
+                {
                     GetComponentsInChildren<Renderer>()[i].material = NotAlive[i];
+                    GetComponentsInChildren<MeshFilter>()[i].mesh = nonactivemeshes[i];
+                }
             }
         }
         if (GG.GetComponent<GlobalGod>().SellArray[place] == -1)

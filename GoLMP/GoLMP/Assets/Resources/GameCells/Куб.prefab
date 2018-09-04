@@ -85,7 +85,7 @@ MeshFilter:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1292867382669750}
-  m_Mesh: {fileID: 4300000, guid: 1448222a1d9f28341844fa8254f4c0df, type: 3}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!65 &65080565731839590
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -111,6 +111,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _tag: 
   Layer: 0
+  activemeshes:
+  - {fileID: 4300000, guid: 1448222a1d9f28341844fa8254f4c0df, type: 3}
+  nonactivemeshes:
+  - {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
   NotAlive:
   - {fileID: 2100000, guid: 95b8bb6fa1d8b684b9f467e51bcc5530, type: 2}
   Alive:

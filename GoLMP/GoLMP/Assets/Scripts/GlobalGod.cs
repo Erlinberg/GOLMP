@@ -7,6 +7,8 @@ public class GlobalGod : MonoBehaviour
     [SerializeField]
     public int FieldSize;
 
+    public int Moves;
+
     public int ready = 0;
 
     public bool begin = false;
@@ -291,14 +293,13 @@ public class GlobalGod : MonoBehaviour
             }
 
             // Окончание определения sum
-
             // Начало условий
-            if (sum > 5)
+            if (sum > 0)
             {
                 SellArrayCopy[id] = 0;
             }
 
-            if (sum <= 1)
+            if (sum <= 0)
             {
                 SellArrayCopy[id] = 0;
             }
@@ -311,7 +312,7 @@ public class GlobalGod : MonoBehaviour
         }
         if (!(SellArrayCopy == SellArray))
         {
-            SellArray = SellArrayCopy;
+            System.Array.Copy(SellArrayCopy,SellArray,FieldSize*FieldSize*FieldSize);
         }
         else
         {
@@ -335,8 +336,9 @@ public class GlobalGod : MonoBehaviour
         {
             Layers = LayersNum;
             timeLeft -= Time.deltaTime;
-            if (timeLeft < 0)
+            if (timeLeft < 0 & Moves > 0)
             {
+                Moves--;
                 RuleCnt();
                 timeLeft = time;
             }

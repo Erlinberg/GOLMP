@@ -213,6 +213,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _tag: 
   Layer: 0
+  activemeshes:
+  - {fileID: 4300002, guid: dd19b870740c984488b5bb70a7d3081e, type: 3}
+  - {fileID: 4300000, guid: dd19b870740c984488b5bb70a7d3081e, type: 3}
+  nonactivemeshes:
+  - {fileID: 0}
+  - {fileID: 4300000, guid: dd19b870740c984488b5bb70a7d3081e, type: 3}
   NotAlive:
   - {fileID: 2100000, guid: 95b8bb6fa1d8b684b9f467e51bcc5530, type: 2}
   - {fileID: 2100000, guid: 95b8bb6fa1d8b684b9f467e51bcc5530, type: 2}
