@@ -294,21 +294,25 @@ public class GlobalGod : MonoBehaviour
 
             // Окончание определения sum
             // Начало условий
-            if (sum > 0)
-            {
-                SellArrayCopy[id] = 0;
-            }
 
-            if (sum <= 0)
+            if (SellArray[id] == 1)
             {
-                SellArrayCopy[id] = 0;
-            }
+                if (sum > 0)
+                {
+                    SellArrayCopy[id] = 0;
+                }
 
-            if (sum == 3)
-            {
-                SellArrayCopy[id] = 1;
+                if (sum <= 0)
+                {
+                    SellArrayCopy[id] = 0;
+                }
+                sum = 0;
             }
-            sum = 0;
+            else
+                if (sum == 3)
+                {
+                    SellArrayCopy[id] = 1;
+                }
         }
         if (!(SellArrayCopy == SellArray))
         {
