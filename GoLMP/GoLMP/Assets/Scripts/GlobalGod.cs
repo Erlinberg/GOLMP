@@ -7,9 +7,11 @@ public class GlobalGod : MonoBehaviour
     [SerializeField]
     public int FieldSize;
 
-    public int Moves;
+    public int Max_for_live;
 
-    public int ready = 0;
+    public int Min_for_live;
+
+    public int Optimal_for_birth;
 
     public bool begin = false;
 
@@ -297,22 +299,20 @@ public class GlobalGod : MonoBehaviour
 
             if (SellArray[id] == 1)
             {
-                if (sum > 0)
+                if (sum > Max_for_live || sum < Min_for_live)
                 {
                     SellArrayCopy[id] = 0;
                 }
 
-                if (sum <= 0)
-                {
-                    SellArrayCopy[id] = 0;
-                }
-                sum = 0;
             }
             else
-                if (sum == 3)
+            {
+                if (sum == Optimal_for_birth)
                 {
                     SellArrayCopy[id] = 1;
                 }
+            }
+            sum = 0;
         }
         if (!(SellArrayCopy == SellArray))
         {
@@ -337,23 +337,13 @@ public class GlobalGod : MonoBehaviour
     private void Update()
     {
         if (begin == true)
-        {
-            Layers = LayersNum;
-            timeLeft -= Time.deltaTime;
-            if (timeLeft < 0 & Moves > 0)
-            {
-                Moves--;
-                RuleCnt();
-                timeLeft = time;
-            }
-        }
+            RuleCnt();
+            begin = false;
 
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
+        if (Input.GetKeyDown(KeyCode.RightArrow))
             begin = true;
-        }
 
-        if (Input.GetKeyDown(KeyCode.Equals) & !begin)
+        if (Input.GetKeyDown(KeyCode.Equals))
         {
             if (Layers < LayersNum)
             {
@@ -361,7 +351,7 @@ public class GlobalGod : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.Minus) & !begin)
+        if (Input.GetKeyDown(KeyCode.Minus))
         {
             if (Layers > 1)
             {

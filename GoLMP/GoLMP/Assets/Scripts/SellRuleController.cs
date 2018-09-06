@@ -155,13 +155,13 @@ public class SellRuleController : MonoBehaviour {
     {
         if (active)
         {
-            if (Input.GetMouseButtonDown(0) & GG.GetComponent<GlobalGod>().begin != true & transform.gameObject.tag == "NonAlive")
+            if (Input.GetMouseButtonDown(0) & transform.gameObject.tag == "NonAlive")
             {
                 ChangeStatus(1);
             }
             else
             {
-                if (Input.GetMouseButtonDown(0) & GG.GetComponent<GlobalGod>().begin != true & transform.gameObject.tag == "Alive")
+                if (Input.GetMouseButtonDown(0) & transform.gameObject.tag == "Alive")
                 {
                     ChangeStatus(0);
                 }
