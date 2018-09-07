@@ -34,15 +34,9 @@ public class GlobalGod : MonoBehaviour
 
     private void CreateField()
     {
-        for (int f = 0; f < FieldSize; f++)
+        for (int f = 0; f < FieldSize / 2; f++)
         {
-            for (int i = 0; i < FieldSize; i++)
-            {
-                for (int j = 0; j < FieldSize; j++)
-                {
-                    Instantiate(Resources.Load("GameCells/" + CharacterNameList[PlayerPrefs.GetInt("CharacterIndex")]), new Vector3(j / 10.0f, (i / 10.0f) * -1, f / 10.0f), Quaternion.identity);
-                }
-            }
+            Instantiate(Resources.Load("Layers/" + "Layer " + f));
         }
     }
 

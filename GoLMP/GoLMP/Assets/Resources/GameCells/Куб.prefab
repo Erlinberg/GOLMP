@@ -97,7 +97,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1.016, y: 1.016, z: 1.016}
-  m_Center: {x: 0, y: 0, z: 0.508}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &114020517443659704
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -119,6 +119,8 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 95b8bb6fa1d8b684b9f467e51bcc5530, type: 2}
   Alive:
   - {fileID: 2100000, guid: de0715d06a6dcd14ba5feb0c55668b22, type: 2}
+  now: 0
+  mtr: {fileID: 0}
 --- !u!114 &114756685278224592
 MonoBehaviour:
   m_ObjectHideFlags: 1

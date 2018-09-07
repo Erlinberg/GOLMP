@@ -28,6 +28,8 @@ public class SellRuleController : MonoBehaviour {
 
     private bool changed = false;
 
+    private bool added = false;
+
     private void Disable()
     {
         gameObject.layer = 8;
@@ -52,78 +54,87 @@ public class SellRuleController : MonoBehaviour {
 
     private void ChangeLayer()
     {
-        float Sp = ((GG.GetComponent<GlobalGod>().LayersNum) + GG.GetComponent<GlobalGod>().Layers - 1) / 10.0f;
-
-        float bp = (GG.GetComponent<GlobalGod>().LayersNum - GG.GetComponent<GlobalGod>().Layers) / 10.0f;
-        
-        if (transform.position.z == bp & transform.position.x >= bp & transform.position.y <= -bp)
+        if ((transform.parent.name == "Layer " + (GG.GetComponent<GlobalGod>().Layers - 1) + "(Clone)"))
         {
-            if (transform.position.x <= Sp & transform.position.y >= -Sp)
-            {
-                Enable();
-                changed = true;
-            }
+            Enable();
         }
 
-        if (transform.position.y == -bp & transform.position.z >= bp & transform.position.x >= bp)
-        {
-            if (transform.position.x <= Sp & transform.position.z <= Sp)
-            {
-                Enable();
-                changed = true;
-            }
-        }
-
-        if (transform.position.x == bp & transform.position.z >= bp & transform.position.y <= -bp)
-        {
-            if (transform.position.z <= Sp & transform.position.y >= -Sp)
-            {
-                Enable();
-                changed = true;
-            }
-        }
-
-
-        if (transform.position.z == Sp & transform.position.x <= Sp & transform.position.y >= -Sp)
-        {
-            if (transform.position.x >= bp & transform.position.y <= -bp)
-            {
-                Enable();
-                changed = true;
-            }
-        }
-
-        if (transform.position.y == -Sp & transform.position.x <= Sp & transform.position.z <= Sp)
-        {
-            if (transform.position.x >= bp & transform.position.z >= bp)
-            {
-                Enable();
-                changed = true;
-            }
-        }
-
-        if (transform.position.x == Sp & transform.position.z <= Sp & transform.position.y >= -Sp)
-        {
-            if (transform.position.z >= bp & transform.position.y <= -bp)
-            {
-                Enable();
-                changed = true;
-            }
-        }
-
-        if (!changed & transform.gameObject.tag == "NonAlive")
+        else
         {
             Disable();
-            changed = false;
         }
+        //float Sp = ((GG.GetComponent<GlobalGod>().LayersNum) + GG.GetComponent<GlobalGod>().Layers - 1) / 10.0f;
 
-        if (!changed & transform.gameObject.tag == "Alive")
-        {
-            GetComponent<BoxCollider>().enabled = false;
-            changed = false;
-        }
+        //float bp = (GG.GetComponent<GlobalGod>().LayersNum - GG.GetComponent<GlobalGod>().Layers) / 10.0f;
+        
+        //if (transform.position.z == bp & transform.position.x >= bp & transform.position.y <= -bp)
+        //{
+        //    if (transform.position.x <= Sp & transform.position.y >= -Sp)
+        //    {
+        //        Enable();
+        //        changed = true;
+        //    }
+        //}
 
-        changed = false;
+        //if (transform.position.y == -bp & transform.position.z >= bp & transform.position.x >= bp)
+        //{
+        //    if (transform.position.x <= Sp & transform.position.z <= Sp)
+        //    {
+        //        Enable();
+        //        changed = true;
+        //    }
+        //}
+
+        //if (transform.position.x == bp & transform.position.z >= bp & transform.position.y <= -bp)
+        //{
+        //    if (transform.position.z <= Sp & transform.position.y >= -Sp)
+        //    {
+        //        Enable();
+        //        changed = true;
+        //    }
+        //}
+
+
+        //if (transform.position.z == Sp & transform.position.x <= Sp & transform.position.y >= -Sp)
+        //{
+        //    if (transform.position.x >= bp & transform.position.y <= -bp)
+        //    {
+        //        Enable();
+        //        changed = true;
+        //    }
+        //}
+
+        //if (transform.position.y == -Sp & transform.position.x <= Sp & transform.position.z <= Sp)
+        //{
+        //    if (transform.position.x >= bp & transform.position.z >= bp)
+        //    {
+        //        Enable();
+        //        changed = true;
+        //    }
+        //}
+
+        //if (transform.position.x == Sp & transform.position.z <= Sp & transform.position.y >= -Sp)
+        //{
+        //    if (transform.position.z >= bp & transform.position.y <= -bp)
+        //    {
+        //        Enable();
+        //        changed = true;
+        //    }
+        //}
+
+        //if (!changed & transform.gameObject.tag == "NonAlive")
+        //{
+        //    Disable();
+        //    changed = false;
+        //}
+
+        //if (!changed & transform.gameObject.tag == "Alive")
+        //{
+        //    GetComponent<BoxCollider>().enabled = false;
+        //    changed = false;
+        //}
+
+        //changed = false;
     }
 
     private void Start()
