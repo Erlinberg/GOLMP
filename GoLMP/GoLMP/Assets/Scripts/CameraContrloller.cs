@@ -4,22 +4,38 @@ using UnityEngine;
 
 public class CameraContrloller : MonoBehaviour
 {
-    float rotSpeed = 20;
 
-    void OnMouseDrag()
+    // Thanks ZebraGab for this code!
+
+    public float horizontalSpeed = 2.0F;
+    public float verticalSpeed = 2.0F;
+    void Update()
     {
-        float rotX = Input.GetAxis("Mouse X") * rotSpeed * Mathf.Deg2Rad;
-        float rotY = Input.GetAxis("Mouse Y") * rotSpeed * Mathf.Deg2Rad;
-
-        transform.RotateAround(Vector3.up, -rotX);
-        transform.RotateAround(Vector3.right, rotY);
+        if (Input.GetKey(KeyCode.Mouse1))
+        {
+            float h = horizontalSpeed * Input.GetAxis("Mouse X");
+            float v = verticalSpeed * Input.GetAxis("Mouse Y");
+            transform.Rotate(-v, -h, 0);
+        }
     }
+
+
+    //float rotSpeed = 20;
+
+    //void OnMouseDrag()
+    //{
+    //    float rotX = Input.GetAxis("Mouse X") * rotSpeed * Mathf.Deg2Rad;
+    //    float rotY = Input.GetAxis("Mouse Y") * rotSpeed * Mathf.Deg2Rad;
+
+    //    transform.RotateAround(Vector3.up, -rotX);
+    //    transform.RotateAround(Vector3.right, rotY);
+    //}
 
 
     // 2nd try
 
 
-    //public float sensitivity = 3; // чувствительность мышки
+    //public float sensitivity = 3.0f; // чувствительность мышки
 
     //private bool IsLayerActive;
 
@@ -27,20 +43,11 @@ public class CameraContrloller : MonoBehaviour
 
     //private float X, Y;
 
-    //void Start()
-    //{
-    //    IsLayerActive = (LayerOn == GameObject.Find("GlobalGod").GetComponent<GlobalGod>().Layers - 1);
-    //}
-
     //void Update()
     //{
-    //    if (IsLayerActive)
+    //    if (Input.GetMouseButton(1))
     //    {
-    //        if (Input.GetMouseButton(1))
-    //        {
-    //            transform.Rotate(new Vector3(Input.GetAxis("Mouse Y"), Input.GetAxis("Mouse X"), 0) * Time.deltaTime * sensitivity);
-    //        }
-    //        transform.localEulerAngles = new Vector3(-X, Y, 0);
+    //        transform.Rotate(new Vector3(Input.GetAxis("Mouse Y"), -Input.GetAxis("Mouse X"), 0) * sensitivity);
     //    }
     //}
 

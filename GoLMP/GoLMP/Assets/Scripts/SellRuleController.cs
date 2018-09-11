@@ -28,8 +28,6 @@ public class SellRuleController : MonoBehaviour {
 
     private bool changed = false;
 
-    private bool added = false;
-
     private void Disable()
     {
         gameObject.layer = 8;
