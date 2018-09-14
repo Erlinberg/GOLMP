@@ -132,3 +132,5 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 95b8bb6fa1d8b684b9f467e51bcc5530, type: 2}
   Alive:
   - {fileID: 2100000, guid: de0715d06a6dcd14ba5feb0c55668b22, type: 2}
+  now: 0
+  mtr: {fileID: 0}
