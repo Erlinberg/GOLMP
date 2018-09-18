@@ -47,7 +47,7 @@ public class GlobalGod : MonoBehaviour
         }
 
 
-        File.AppendAllText("Settings/settings.ini", text);
+        File.AppendAllText("Settings/settings.ini",Time.time.ToString() + ':' + text + '\n');
     }
 
     private int x, y, z, id, new_x, new_y, new_z;
@@ -71,38 +71,34 @@ public class GlobalGod : MonoBehaviour
         new_y = y + dy;
         new_z = z + dz;
         if (dx == 0 & dy == 0 & dz == 0)
-        {
             return 0;
-        }
         else if (new_x < 0 || new_x > FieldSize - 1)
             return 0;
 
-        else if (new_y < 0 || new_y> FieldSize - 1)
+        else if (new_y < 0 || new_y > FieldSize - 1)
             return 0;
 
         else if (new_z < 0 || new_z > FieldSize - 1)
             return 0;
         else
         {
-            return SellArrayCopy[id];
+            return SellArray[id];
         }
     }
     private void Sum_around()
     {
-        Write("74");
         sum = 0;
         delta[0] = -1;
         delta[1] = 0;
         delta[2] = 1;
-        Write("79");
         foreach (int dx in delta)
             foreach (int dy in delta)
                 foreach (int dz in delta)
                 {
-                    Write("83");
                     sum += In_field(dx, dy, dz);
-                    Write("86");
                 }
+        if (!(sum == 0))
+            Debug.Log(sum);
     }
     private void CreateField()
     {
@@ -122,13 +118,11 @@ public class GlobalGod : MonoBehaviour
 
     private void RuleCnt()
     {
-        Write("107");
-        for (int _id = 0; id < Mathf.Pow(FieldSize,3); id++)
+        for (int _id = 0; _id < Mathf.Pow(FieldSize, 3); _id++)
         {
-            Write("109");
             id = _id;
-            Write("111");
             Sum_around();
+            Write("sum " + sum);
             //// Определение sum
 
             //// 12
@@ -139,7 +133,7 @@ public class GlobalGod : MonoBehaviour
             //        sum += 1;
             //    }
             //}
-            
+
             //// 14
             //if (id + 1 < Mathf.Pow(FieldSize, 3))
             //{
@@ -368,22 +362,21 @@ public class GlobalGod : MonoBehaviour
             //// Окончание определения sum
             //// Начало условий
 
-            //if (SellArray[id] == 1)
-            //{
-            //    if (sum > Max_for_live || sum < Min_for_live)
-            //    {
-            //        SellArrayCopy[id] = 0;
-            //    }
+            if (SellArray[id] == 1)
+            {
+                if (sum > Max_for_live || sum < Min_for_live)
+                {
+                    SellArrayCopy[id] = 0;
+                }
 
-            //}
-            //else
-            //{
-            //    if (sum == Optimal_for_birth)
-            //    {
-            //        SellArrayCopy[id] = 1;
-            //    }
-            //}
-            //sum = 0;
+            }
+            else
+            {
+                if (sum == Optimal_for_birth)
+                {
+                    SellArrayCopy[id] = 1;
+                }
+            }
         }
 
         if (!(SellArrayCopy == SellArray))
