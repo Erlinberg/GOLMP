@@ -4,66 +4,82 @@ using UnityEngine;
 
 public class SellRuleController : MonoBehaviour {
 
-    private GameObject GG;
-
-    public string _tag;
-
-    private int place;
-
-    public int Layer;
-
     public Mesh[] activemeshes;
 
     public Mesh[] nonactivemeshes;
 
-    private bool active = true;
 
     public Material[] NotAlive;
 
     public Material[] Alive;
 
-    public int now = 0;
+
+
+    private int CellID;
+
+    public int CellCurrentLayer;
+
+    public int Style = 0;
+
+
+
+    private bool Changed = false;
+
+    private bool Active = true;
+
+
+
+    private GameObject GameController;
+
+
 
     public Material mtr;
 
-    private bool changed = false;
 
-    private void Disable()
+
+    private void DisableCell()
     {
         gameObject.layer = 8;
+
         foreach (Transform child in transform)
         {
             child.gameObject.layer = 8;
         }
+
         GetComponent<BoxCollider>().enabled = false;
-        active = false;
+
+        Active = false;
     }
 
-    private void Enable()
+    private void EnableCell()
     {
         gameObject.layer = 0;
+
         foreach (Transform child in transform)
         {
             child.gameObject.layer = 0;
         }
+
         GetComponent<BoxCollider>().enabled = true;
-        active = true;
+
+        Active = true;
     }
 
     private void ChangeLayer()
     {
-        if ((transform.parent.name == "Layer " + (GG.GetComponent<GlobalGod>().Layers - 1) + "(Clone)"))
+        if ((transform.parent.name == ("Layer " + (GameController.GetComponent<GlobalGod>().CurrentLayers - 1) + "(Clone)")))
         {
-            Enable();
+            EnableCell();
         }
 
         else
         {
-            Disable();
+            DisableCell();
         }
-        //float Sp = ((GG.GetComponent<GlobalGod>().LayersNum) + GG.GetComponent<GlobalGod>().Layers - 1) / 10.0f;
 
-        //float bp = (GG.GetComponent<GlobalGod>().LayersNum - GG.GetComponent<GlobalGod>().Layers) / 10.0f;
+        //float Sp = ((GameController.GetComponent<GlobalGod>().LayersNum) + GameController.GetComponent<GlobalGod>().Layers - 1) / 10.0f;
+
+        //float bp = (GameController.GetComponent<GlobalGod>().LayersNum - GameController.GetComponent<GlobalGod>().Layers) / 10.0f;
         
         //if (transform.position.z == bp & transform.position.x >= bp & transform.position.y <= -bp)
         //{
@@ -135,110 +151,115 @@ public class SellRuleController : MonoBehaviour {
         //changed = false;
     }
 
-    private void Start()
-    {
-        place = Mathf.RoundToInt(transform.position.x * 10.0f + -1 * transform.position.y * 100.0f + transform.position.z * 1000.0f);
-        GG = GameObject.Find("GlobalGod");
-        Layer = GG.GetComponent<GlobalGod>().Layers;
-        _tag = transform.gameObject.tag;
-        ChangeLayer();
-    }
-
     private void ChangeStatus(int Status)
     {
-        GG.GetComponent<GlobalGod>().SellArray[place] = Status;
+        GameController.GetComponent<GlobalGod>().MainCellArray[CellID] = Status;
         if (Status == 0)
         {
             transform.gameObject.tag = "NonAlive";
         }
-        else
+
+        else if (Status == 1)
         {
-            if (Status == 1)
-            {
-                transform.gameObject.tag = "Alive";
-            }
+            transform.gameObject.tag = "Alive";
         }
     }
 
-    private void OnMouseOver()
-    {
-        if (active)
-        {
-            if (Input.GetMouseButtonDown(0) & transform.gameObject.tag == "NonAlive")
-            {
-                ChangeStatus(1);
-            }
-            else
-            {
-                if (Input.GetMouseButtonDown(0) & transform.gameObject.tag == "Alive")
-                {
-                    ChangeStatus(0);
-                }
-            }
-
-            if (transform.gameObject.tag == "Alive")
-            {
-                if (Input.GetKeyDown(KeyCode.Alpha1))
-                {
-                    now = 1;
-                }
-
-                if (Input.GetKeyDown(KeyCode.Alpha2))
-                {
-                    now = 2;
-                }
-            }
-        }
-    }
-
-    public void DoMove()
+    public void DoStep()
     {
         if (!GetComponent<mousecntr>().Selected)
         {
-            if (GG.GetComponent<GlobalGod>().SellArray[place] == 1)
+            if (GameController.GetComponent<GlobalGod>().MainCellArray[CellID] == 1)
             {
-                for (int i = 0;i < Alive.Length; i++)
+                for (int materialID = 0; materialID < Alive.Length; materialID++)
                 {
-                    GetComponentsInChildren<Renderer>()[i].material = Alive[i];
-                    GetComponentsInChildren<MeshFilter>()[i].mesh = activemeshes[i];
+                    GetComponentsInChildren<Renderer>()[materialID].material = Alive[materialID];
+                    GetComponentsInChildren<MeshFilter>()[materialID].mesh = activemeshes[materialID];
                 }
-                transform.gameObject.layer = 9;
-                foreach (Transform child in transform)
-                    child.gameObject.layer = 9;
 
-                if (now == 1)
+
+                transform.gameObject.layer = 9;
+
+                foreach (Transform child in transform)
+                {
+                    child.gameObject.layer = 9;
+                }
+
+
+                if (Style == 1)
                 {
                     GetComponent<Renderer>().material = Alive[0];
                 }
 
-                if (now == 2)
+                if (Style == 2)
                 {
                     GetComponent<Renderer>().material = mtr;
                 }
+
             }
+
             else
             {
-                for (int i = 0; i < NotAlive.Length; i++)
+                for (int meshID = 0; meshID < NotAlive.Length; meshID++)
                 {
-                    GetComponentsInChildren<Renderer>()[i].material = NotAlive[i];
-                    GetComponentsInChildren<MeshFilter>()[i].mesh = nonactivemeshes[i];
+                    GetComponentsInChildren<Renderer>()[meshID].material = NotAlive[meshID];
+                    GetComponentsInChildren<MeshFilter>()[meshID].mesh = nonactivemeshes[meshID];
                 }
             }
         }
-        if (GG.GetComponent<GlobalGod>().SellArray[place] == -1)
+
+        if (GameController.GetComponent<GlobalGod>().MainCellArray[CellID] == -1)
         {
             GetComponent<mousecntr>().enabled = false;
             GetComponent<SellRuleController>().enabled = false;
         }
     }
 
+
+    private void Start()
+    {
+        CellID = Mathf.RoundToInt(transform.position.x * 10.0f + -1 * transform.position.y * 100.0f + transform.position.z * 1000.0f);
+        GameController = GameObject.Find("GlobalGod");
+        CellCurrentLayer = GameController.GetComponent<GlobalGod>().CurrentLayers;
+        ChangeLayer();
+    }
+
+    private void OnMouseOver()
+    {
+        if (Active)
+        {
+            if (Input.GetMouseButtonDown(0) & transform.gameObject.tag == "NonAlive")
+            {
+                ChangeStatus(1);
+            }
+
+            else if (Input.GetMouseButtonDown(0) & transform.gameObject.tag == "Alive")
+            {
+                ChangeStatus(0);
+            }
+
+            if (transform.gameObject.tag == "Alive")
+            {
+                if (Input.GetKeyDown(KeyCode.Alpha1))
+                {
+                    Style = 1;
+                }
+
+                if (Input.GetKeyDown(KeyCode.Alpha2))
+                {
+                    Style = 2;
+                }
+            }
+        }
+    }
+
     void Update ()
     {
-        DoMove();
-        if (Layer != GG.GetComponent<GlobalGod>().Layers)
+        DoStep();
+        if (CellCurrentLayer != GameController.GetComponent<GlobalGod>().CurrentLayers)
         {
             ChangeLayer();
-            Layer = GG.GetComponent<GlobalGod>().Layers;
+            CellCurrentLayer = GameController.GetComponent<GlobalGod>().CurrentLayers;
         }
     }
 }

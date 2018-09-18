@@ -7,47 +7,65 @@ public class CharacterListController : MonoBehaviour {
 
     private GameObject[] CharacterList;
 
-    private int index = 0;
 
-	void Start ()
-    {
-        CharacterList = new GameObject[transform.childCount];
-         for (int i = 0;i < transform.childCount;i++)
-            CharacterList[i] = transform.GetChild(i).gameObject;
+    private int Index = 0;
 
-         foreach (GameObject go in CharacterList)
-            go.SetActive(false);
 
-        if (CharacterList[0])
-            CharacterList[0].SetActive(true);
-        
-	}
+
 
     public void ToggleLeft()
     {
-        CharacterList[index].SetActive(false);
+        CharacterList[Index].SetActive(false);
 
-        index--;
-        if (index < 0)
-            index = CharacterList.Length - 1;
+        Index--;
 
-        CharacterList[index].SetActive(true);
+        if (Index < 0)
+        {
+            Index = CharacterList.Length - 1;
+        }
+
+        CharacterList[Index].SetActive(true);
     }
 
     public void ToggleRight()
     {
-        CharacterList[index].SetActive(false);
+        CharacterList[Index].SetActive(false);
 
-        index++;
-        if (index == CharacterList.Length)
-            index = 0;
+        Index++;
 
-        CharacterList[index].SetActive(true);
+        if (Index == CharacterList.Length)
+        {
+            Index = 0;
+        }
+
+        CharacterList[Index].SetActive(true);
     }
 
     public void Select()
     {
-        PlayerPrefs.SetInt("CharacterIndex", index);
+        PlayerPrefs.SetInt("CharacterIndex", Index);
         SceneManager.LoadScene("AAAB");
+    }
+
+    void Start()
+    {
+        CharacterList = new GameObject[transform.childCount];
+
+        for (int id = 0; id < transform.childCount; id++)
+        {
+            CharacterList[id] = transform.GetChild(id).gameObject;
+        }
+
+        foreach (GameObject characterObject in CharacterList)
+        {
+            characterObject.SetActive(false);
+        }
+
+        if (CharacterList[0])
+        {
+            CharacterList[0].SetActive(true);
+        }
+
+
     }
 }
