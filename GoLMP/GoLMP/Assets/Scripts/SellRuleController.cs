@@ -15,7 +15,7 @@ public class SellRuleController : MonoBehaviour {
 
 
 
-    private int CellID;
+    public int CellID;
 
     public int CellCurrentLayer;
 

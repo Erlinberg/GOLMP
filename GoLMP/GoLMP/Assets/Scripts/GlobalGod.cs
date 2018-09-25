@@ -40,6 +40,10 @@ public class GlobalGod : MonoBehaviour
 
     private int NumberOfCollidedAliveCells = 0;
 
+    public int AllTime = 2;
+
+
+    private float TimeLeft = 2;
 
 
     public bool BeginSimulation = false;
@@ -137,8 +141,6 @@ public class GlobalGod : MonoBehaviour
         {
             SumAround(id);
 
-            WriteFunction("NumberOfCollidedAliveCells " + NumberOfCollidedAliveCells);
-
             if (MainCellArray[id] == 1)
             {
                 if ((NumberOfCollidedAliveCells > UnderPopulation) || (NumberOfCollidedAliveCells < OverPopulation))
@@ -147,16 +149,13 @@ public class GlobalGod : MonoBehaviour
                 }
 
             }
-            else
+            else if (NumberOfCollidedAliveCells == NewLife)
             {
-                if (NumberOfCollidedAliveCells == NewLife)
-                {
-                    ChangedCellArray[id] = 1;
-                }
+                ChangedCellArray[id] = 1;
             }
         }
 
-        if (!(ChangedCellArray == MainCellArray))
+        if (ChangedCellArray != MainCellArray)
         {
             System.Array.Copy(ChangedCellArray,MainCellArray,FieldSize*FieldSize*FieldSize);
         }
@@ -412,6 +411,9 @@ public class GlobalGod : MonoBehaviour
 
         CellParametersArray = new Cell[FieldSize * FieldSize * FieldSize];
 
+        AllLayersNumber = FieldSize / 2;
+        CurrentLayers = AllLayersNumber;
+
         for (int cellID = 0; cellID < (FieldSize*FieldSize*FieldSize); cellID++)
         {
             CellParametersArray[cellID] = new Cell();
@@ -425,15 +427,24 @@ public class GlobalGod : MonoBehaviour
 
     private void Update()
     {
-        if (BeginSimulation == true)
+
+        if (BeginSimulation)
         {
-            CheckOneStep();
-            BeginSimulation = false;
+            TimeLeft -= Time.deltaTime;
+            if (TimeLeft < 0)
+            {
+                CheckOneStep();
+                TimeLeft = AllTime;
+            }
         }
 
         if (Input.GetKeyDown(KeyCode.RightArrow))
         {
             BeginSimulation = true;
+
+            CheckOneStep();
+
+            BeginSimulation = false;
         }
 
         if (Input.GetKeyDown(KeyCode.Equals))
