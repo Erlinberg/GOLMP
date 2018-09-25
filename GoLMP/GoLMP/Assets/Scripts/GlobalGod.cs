@@ -119,7 +119,7 @@ public class GlobalGod : MonoBehaviour
     {
         for (int layerID = 0; layerID < FieldSize / 2; layerID++)
         {
-            Instantiate(Resources.Load("CurrentLayers/" + "Layer " + layerID));
+            Instantiate(Resources.Load("Layers/" + "Layer " + layerID));
         }
     }
 
