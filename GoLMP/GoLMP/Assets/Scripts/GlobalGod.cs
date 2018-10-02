@@ -440,11 +440,7 @@ public class GlobalGod : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.RightArrow))
         {
-            BeginSimulation = true;
-
             CheckOneStep();
-
-            BeginSimulation = false;
         }
 
         if (Input.GetKeyDown(KeyCode.Equals))
