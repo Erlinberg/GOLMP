@@ -122,8 +122,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 820f056ab848d0e4eaf463f3ec235ed6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _tag: 
-  Layer: 0
   activemeshes:
   - {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
   nonactivemeshes:
@@ -132,5 +130,7 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 95b8bb6fa1d8b684b9f467e51bcc5530, type: 2}
   Alive:
   - {fileID: 2100000, guid: de0715d06a6dcd14ba5feb0c55668b22, type: 2}
-  now: 0
+  CellID: 0
+  CellCurrentLayer: 0
+  Style: 0
   mtr: {fileID: 0}

@@ -24,6 +24,9 @@ public class GlobalGod : MonoBehaviour
 
     private int[] Delta = new int[3];
 
+    // MD is meaning Multi - Dimentional(This one is two dimentional) Array
+    private List<List<Transform>> LayersMDArray = new List<List<Transform>>();
+
 
 
     public int FieldSize;
@@ -119,11 +122,30 @@ public class GlobalGod : MonoBehaviour
                 }
     }
 
+
+
+    private void CreateLayerPrefab()
+    {
+        int Layer = 0;
+        for (int z = 0; z < FieldSize; z++)
+        {
+            for (int y = 0; y < FieldSize; y++)
+            {
+                for (int x = 0; x < FieldSize; x++)
+                {
+
+                    LayersMDArray[Layer].Add(Instantiate(Resources.Load("GameCells/Cube"), new Vector3(x / 10.0f, (y / 10.0f) * -1, z / 10.0f), Quaternion.identity) as Transform);
+
+                }
+            }
+        }
+    }
+
     private void CreateField()
     {
-        for (int layerID = 0; layerID < FieldSize / 2; layerID++)
+        foreach (Transform obj in LayersMDArray[AllLayersNumber - CurrentLayers])
         {
-            Instantiate(Resources.Load("Layers/" + "Layer " + layerID));
+            obj.gameObject.SetActive(true);
         }
     }
 
@@ -166,242 +188,7 @@ public class GlobalGod : MonoBehaviour
             GameObject View = GameObject.Find("MenuCanvas");
             View.GetComponent<Canvas>().enabled = true;
         }
-
-        //// 12
-        //if (id - 1 > 0)
-        //{
-        //    if (MainCellArray[id - 1] == 1)
-        //    {
-        //        NumberOfCollidedAliveCells += 1;
-        //    }
-        //}
-
-        //// 14
-        //if (id + 1 < Mathf.Pow(FieldSize, 3))
-        //{
-        //    if (MainCellArray[id + 1] == 1)
-        //    {
-        //        NumberOfCollidedAliveCells += 1;
-        //    }
-        //}
-
-        //// 10
-        //if (id - FieldSize > 0)
-        //{
-        //    if (MainCellArray[id - FieldSize] == 1)
-        //    {
-        //        NumberOfCollidedAliveCells += 1;
-        //    }
-        //}
-
-        //// 16
-        //if (id + FieldSize < Mathf.Pow(FieldSize, 3))
-        //{
-        //    if (MainCellArray[id + FieldSize] == 1)
-        //    {
-        //        NumberOfCollidedAliveCells += 1;
-        //    }
-        //}
-
-        //// 22
-        //if (id + Mathf.Pow(FieldSize, 2) < Mathf.Pow(FieldSize, 3))
-        //{
-        //    if (MainCellArray[id + Mathf.RoundToInt(Mathf.Pow(FieldSize, 2))] == 1)
-        //    {
-        //        NumberOfCollidedAliveCells += 1;
-        //    }
-        //}
-
-        //// 4
-        //if (id - Mathf.Pow(FieldSize, 2) > 0)
-        //{
-        //    if (MainCellArray[id - Mathf.RoundToInt(Mathf.Pow(FieldSize, 2))] == 1)
-        //    {
-        //        NumberOfCollidedAliveCells += 1;
-        //    }
-        //}
-
-        //// 8
-        //if (id - Mathf.Pow(FieldSize, 2) + FieldSize + 1 > 0)
-        //{
-        //    if (MainCellArray[id - Mathf.RoundToInt(Mathf.Pow(FieldSize, 2)) + FieldSize + 1] == 1)
-        //    {
-        //        NumberOfCollidedAliveCells += 1;
-        //    }
-        //}
-
-        //// 6
-        //if (id - Mathf.Pow(FieldSize, 2) + FieldSize - 1 > 0)
-        //{
-        //    if (MainCellArray[id - Mathf.RoundToInt(Mathf.Pow(FieldSize, 2)) + FieldSize - 1] == 1)
-        //    {
-        //        NumberOfCollidedAliveCells += 1;
-        //    }
-        //}
-
-        //// 7
-        //if (id - Mathf.Pow(FieldSize, 2) + FieldSize > 0)
-        //{
-        //    if (MainCellArray[id - Mathf.RoundToInt(Mathf.Pow(FieldSize, 2)) + FieldSize] == 1)
-        //    {
-        //        NumberOfCollidedAliveCells += 1;
-        //    }
-        //}
-
-        //// 5
-        //if (id - Mathf.Pow(FieldSize, 2) + 1 > 0)
-        //{
-        //    if (MainCellArray[id - Mathf.RoundToInt(Mathf.Pow(FieldSize, 2)) + 1] == 1)
-        //    {
-        //        NumberOfCollidedAliveCells += 1;
-        //    }
-        //}
-
-        //// 3 
-        //if (id - Mathf.Pow(FieldSize, 2) - 1 > 0)
-        //{
-        //    if (MainCellArray[id - Mathf.RoundToInt(Mathf.Pow(FieldSize, 2)) - 1] == 1)
-        //    {
-        //        NumberOfCollidedAliveCells += 1;
-        //    }
-        //}
-
-        //// 2
-        //if (id - Mathf.Pow(FieldSize, 2) - FieldSize + 1 > 0)
-        //{
-        //    if (MainCellArray[id - Mathf.RoundToInt(Mathf.Pow(FieldSize, 2)) - FieldSize + 1] == 1)
-        //    {
-        //        NumberOfCollidedAliveCells += 1;
-        //    }
-        //}
-
-        //// 0
-        //if (id - Mathf.Pow(FieldSize, 2) - FieldSize - 1 > 0)
-        //{
-        //    if (MainCellArray[id - Mathf.RoundToInt(Mathf.Pow(FieldSize, 2)) - FieldSize - 1] == 1)
-        //    {
-        //        NumberOfCollidedAliveCells += 1;
-        //    }
-        //}
-
-        //// 1
-        //if (id - Mathf.Pow(FieldSize, 2) - FieldSize > 0)
-        //{
-        //    if (MainCellArray[id - Mathf.RoundToInt(Mathf.Pow(FieldSize, 2)) - FieldSize] == 1)
-        //    {
-        //        NumberOfCollidedAliveCells += 1;
-        //    }
-        //}
-
-        //// 9
-        //if (id - FieldSize - 1 > 0)
-        //{
-        //    if (MainCellArray[id - FieldSize - 1] == 1)
-        //    {
-        //        NumberOfCollidedAliveCells += 1;
-        //    }
-        //}
-
-        //// 11
-        //if (id - FieldSize + 1 > 0)
-        //{
-        //    if (MainCellArray[id - FieldSize + 1] == 1)
-        //    {
-        //        NumberOfCollidedAliveCells += 1;
-        //    }
-        //}
-
-        //// 15
-        //if (id + FieldSize - 1 < Mathf.Pow(FieldSize, 3))
-        //{
-        //    if (MainCellArray[id + FieldSize - 1] == 1)
-        //    {
-        //        NumberOfCollidedAliveCells += 1;
-        //    }
-        //}
-
-        //// 17
-        //if (id + FieldSize + 1 < Mathf.Pow(FieldSize, 3))
-        //{
-        //    if (MainCellArray[id + FieldSize + 1] == 1)
-        //    {
-        //        NumberOfCollidedAliveCells += 1;
-        //    }
-        //}
-
-        //// 21
-        //if (id + Mathf.Pow(FieldSize, 2) - 1 < Mathf.Pow(FieldSize, 3))
-        //{
-        //    if (MainCellArray[id + Mathf.RoundToInt(Mathf.Pow(FieldSize, 2)) - 1] == 1)
-        //    {
-        //        NumberOfCollidedAliveCells += 1;
-        //    }
-        //}
-
-        //// 23
-        //if (id + Mathf.Pow(FieldSize, 2) + 1 < Mathf.Pow(FieldSize, 3))
-        //{
-        //    if (MainCellArray[id + Mathf.RoundToInt(Mathf.Pow(FieldSize, 2)) + 1] == 1)
-        //    {
-        //        NumberOfCollidedAliveCells += 1;
-        //    }
-        //}
-
-        //// 19
-        //if (id + Mathf.Pow(FieldSize, 2) - FieldSize < Mathf.Pow(FieldSize, 3))
-        //{
-        //    if (MainCellArray[id + Mathf.RoundToInt(Mathf.Pow(FieldSize, 2)) - FieldSize] == 1)
-        //    {
-        //        NumberOfCollidedAliveCells += 1;
-        //    }
-        //}
-
-        //// 18
-        //if (id + Mathf.Pow(FieldSize, 2) - FieldSize - 1 < Mathf.Pow(FieldSize, 3))
-        //{
-        //    if (MainCellArray[id + Mathf.RoundToInt(Mathf.Pow(FieldSize, 2)) - FieldSize - 1] == 1)
-        //    {
-        //        NumberOfCollidedAliveCells += 1;
-        //    }
-        //}
-
-        //// 20
-        //if (id + Mathf.Pow(FieldSize, 2) - FieldSize + 1 < Mathf.Pow(FieldSize, 3))
-        //{
-        //    if (MainCellArray[id + Mathf.RoundToInt(Mathf.Pow(FieldSize, 2)) - FieldSize + 1] == 1)
-        //    {
-        //        NumberOfCollidedAliveCells += 1;
-        //    }
-        //}
-
-        //// 24
-        //if (id + Mathf.Pow(FieldSize, 2) + FieldSize - 1 < Mathf.Pow(FieldSize, 3))
-        //{
-        //    if (MainCellArray[id + Mathf.RoundToInt(Mathf.Pow(FieldSize, 2)) + FieldSize - 1] == 1)
-        //    {
-        //        NumberOfCollidedAliveCells += 1;
-        //    }
-        //}
-
-        //// 25
-        //if (id + Mathf.Pow(FieldSize, 2) + FieldSize < Mathf.Pow(FieldSize, 3))
-        //{
-        //    if (MainCellArray[id + Mathf.RoundToInt(Mathf.Pow(FieldSize, 2)) + FieldSize] == 1)
-        //    {
-        //        NumberOfCollidedAliveCells += 1;
-        //    }
-        //}
-
-        //// 26
-        //if (id + Mathf.Pow(FieldSize, 2) + FieldSize + 1 < Mathf.Pow(FieldSize, 3))
-        //{
-        //    if (MainCellArray[id + Mathf.RoundToInt(Mathf.Pow(FieldSize, 2)) + FieldSize + 1] == 1)
-        //    {
-        //        NumberOfCollidedAliveCells += 1;
-        //    }
-        //}
     }
-
 
     void Start()
     {
@@ -412,7 +199,15 @@ public class GlobalGod : MonoBehaviour
         CellParametersArray = new Cell[FieldSize * FieldSize * FieldSize];
 
         AllLayersNumber = FieldSize / 2;
+
         CurrentLayers = AllLayersNumber;
+
+        FieldSize = PlayerPrefs.GetInt("FieldSize", 10);
+
+        for (int i = 0; i < FieldSize/2; i++)
+        {
+            LayersMDArray.Add(new List<Transform>());
+        }
 
         for (int cellID = 0; cellID < (FieldSize*FieldSize*FieldSize); cellID++)
         {
@@ -422,6 +217,7 @@ public class GlobalGod : MonoBehaviour
             CellParametersArray[cellID].z = cellID / (FieldSize * FieldSize);
         }
 
+        CreateLayerPrefab();
         CreateField();
     }
 
